@@ -17,7 +17,7 @@ function Sidebar() {
         <li className="flex-1">
           <Link
             className="flex flex-col items-center gap-2 rounded-md bg-[#2991EE] p-5 text-center hover:opacity-50 lg:flex-row lg:text-left"
-            href="/dreams"
+            href="/"
           >
             <LayoutDashboardIcon className="h-6 w-6 lg:h-8 lg:w-8" />
             <div className="hidden md:inline">
@@ -29,7 +29,7 @@ function Sidebar() {
         <li className="flex-1">
           <Link
             className="flex flex-col items-center gap-2 rounded-md bg-[#2991EE] p-5 text-center hover:opacity-50 lg:flex-row lg:text-left"
-            href="/dreams/share-dream"
+            href="/share"
           >
             <Share className="h-6 w-6 lg:h-6 lg:w-8" />
             <div className="hidden md:inline">
@@ -41,7 +41,7 @@ function Sidebar() {
         <li className="flex-1">
           <Link
             className="flex flex-col items-center gap-2 rounded-md bg-[#2991EE] p-5 text-center hover:opacity-50 lg:flex-row lg:text-left"
-            href="/dreams/delete-account"
+            href="/delete-account"
           >
             <DeleteIcon className="h-6 w-6 lg:h-8 lg:w-8" />
             <div className="hidden md:inline">
