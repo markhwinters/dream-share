@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  clerkId       String    @unique
+  email         String    @unique
+  username      String    @unique
+  displayName   String?
+  profileImage  String?
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  videos        Video[]
+}
+
+model Video {
+  id              String    @id @default(cuid())
+  title           String
+  description     String?
+  videoUrl        String
+  thumbnailUrl    String?
+  duration        Int       // duration in seconds
+  status          Status    @default(PENDING)
+  socialShares    SocialShare[]
+  viewCount       Int       @default(0)
+  likeCount       Int       @default(0)
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String
+  adminFeedback   String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model SocialShare {
+  id              String    @id @default(cuid())
+  platform        Platform
+  shareUrl        String?
+  shareStatus     ShareStatus @default(PENDING)
+  shareTime       DateTime?
+  video           Video     @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  videoId         String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@unique([videoId, platform])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Status {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum Platform {
+  YOUTUBE
+  INSTAGRAM
+  TWITTER
+  FACEBOOK
+  TIKTOK
+}
+
+enum ShareStatus {
+  PENDING
+  SHARED
+  FAILED
+}
