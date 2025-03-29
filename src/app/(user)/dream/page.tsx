@@ -1,7 +1,7 @@
 import React from "react";
 
-function DreamsPage() {
+function DreamPage() {
   return <div>DreamsPage</div>;
 }
 
-export default DreamsPage;
+export default DreamPage;
