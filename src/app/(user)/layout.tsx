@@ -12,7 +12,13 @@ async function UserLayout({ children }: { children: ReactNode }) {
   if (role !== "USER") {
     redirect("/");
   }
-  return <div>{children}</div>;
+  return (
+    <div className="flex flex-1">
+      <main className="flex-1 flex justify-center lg:justify-start items-start max-w-5xl mx-auto w-full">
+        {children}
+      </main>
+    </div>
+  );
 }
 
 export default UserLayout;
