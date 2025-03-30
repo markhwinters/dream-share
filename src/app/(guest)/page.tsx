@@ -4,7 +4,7 @@ import React from "react";
 async function HomePage() {
   const role = await getUserRole();
 
-  if (role === "MEMBER") {
+  if (role === "USER") {
     redirect("/dream");
   }
   return <div>HomePage</div>;

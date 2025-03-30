@@ -9,7 +9,7 @@ async function UserLayout({ children }: { children: ReactNode }) {
 
   const role = await getUserRole();
 
-  if (role !== "MEMBER") {
+  if (role !== "USER") {
     redirect("/");
   }
   return <div>{children}</div>;

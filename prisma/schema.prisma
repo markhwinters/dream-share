@@ -13,17 +13,61 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum VideoStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum SocialPlatform {
+  YOUTUBE
+  TWITTER
+  INSTAGRAM
+  FACEBOOK
+  TIKTOK
+}
+
 model User {
   id String @id @default(cuid())
-  clerkId String @unique
-  email String @unique
-  role Role @default(MEMBER)
-  createdAt DateTime @default(now()) // member since 2020
-  updatedAt DateTime @updatedAt
+  email     String    @unique
+  clerkId   String    @unique
+  name      String?
+  image     String?
+  role      Role      @default(USER)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  videos    Video[]
 }
 
 enum Role {
   ADMIN
-  MEMBER
-  GUEST
+  USER
+}
+
+model Video {
+  id          String      @id @default(cuid())
+  title       String
+  description String?
+  fileUrl     String
+  thumbnailUrl String?
+  status      VideoStatus @default(PENDING)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  userId      String
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shares      SocialShare[]
+
+  @@index([userId])
+}
+
+model SocialShare {
+  id            String         @id @default(cuid())
+  videoId       String
+  video         Video          @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  platform      SocialPlatform
+  shareUrl      String?
+  platformPostId String?
+  createdAt     DateTime       @default(now())
+
+  @@index([videoId])
 }

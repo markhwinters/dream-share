@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/prisma";
 import { auth, currentUser } from "@clerk/nextjs/server";
+
 export async function getUserRole() {
   const { userId } = await auth();
   if (!userId) return "GUEST";
@@ -13,6 +14,7 @@ export async function getUserRole() {
 
   return user?.role || "GUEST";
 }
+
 export async function syncUser() {
   try {
     const { userId } = await auth();
@@ -34,7 +36,9 @@ export async function syncUser() {
     const dbUser = await prisma.user.create({
       data: {
         clerkId: userId,
+        name: `${user.firstName || ""} ${user.lastName || ""}`,
         email: user.emailAddresses[0].emailAddress,
+        image: user.imageUrl,
       },
     });
 

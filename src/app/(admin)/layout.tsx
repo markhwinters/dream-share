@@ -6,7 +6,7 @@ import React, { ReactNode } from "react";
 async function Adminlayout({ children }: { children: ReactNode }) {
   const role = await getUserRole();
   if (role !== "ADMIN") {
-    redirect("/");
+    redirect("/dream");
   }
   return <div>{children}</div>;
 }
