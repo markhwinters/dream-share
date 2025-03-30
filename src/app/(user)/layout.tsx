@@ -1,3 +1,5 @@
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
 import { getUserRole, syncUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
@@ -13,10 +15,15 @@ async function UserLayout({ children }: { children: ReactNode }) {
     redirect("/");
   }
   return (
-    <div className="flex flex-1">
-      <main className="flex-1 flex justify-center lg:justify-start items-start max-w-5xl mx-auto w-full">
-        {children}
-      </main>
+    <div className="flex flex-col flex-1">
+      {/* header */}
+      <Header />
+      <div className="flex flex-col flex-1 lg:flex-row bg-gray-100">
+        <Sidebar />
+        <main className="flex-1 flex justify-center lg:justify-start items-start max-w-5xl mx-auto w-full px-5">
+          {children}
+        </main>
+      </div>
     </div>
   );
 }
