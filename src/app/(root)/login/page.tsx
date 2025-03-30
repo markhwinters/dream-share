@@ -1,8 +1,15 @@
 import Avatar from "@/components/Avatar";
+import { getUserRole } from "@/lib/actions/user.actions";
 import { SignIn } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 import React from "react";
 
-function LoginPage() {
+async function LoginPage() {
+  const role = await getUserRole();
+
+  if (role === "MEMBER") {
+    redirect("/dream");
+  }
   return (
     <div className="flex py-10 md:py-0 flex-col flex-1 justify-center items-center bg-[#64B5F5]">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
