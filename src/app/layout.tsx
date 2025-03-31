@@ -16,9 +16,9 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata: Metadata = {
-  title: "Dream Share",
-  description: "Share your dream",
+export const metadata = {
+  title: "Dream Share - Share Your Dreams with the World",
+  description: "Upload and share your dreams with the world",
 };
 
 export default function RootLayout({
@@ -32,15 +32,9 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex antialiased`}
         >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-          <Toaster />
+          <Navbar />
+            <main className="min-h-screen">{children}</main>
+            <Toaster position="bottom-right" />
         </body>
       </html>
     </ClerkProvider>
