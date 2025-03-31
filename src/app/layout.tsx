@@ -31,7 +31,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <Navbar />
             <main className="min-h-screen">{children}</main>
