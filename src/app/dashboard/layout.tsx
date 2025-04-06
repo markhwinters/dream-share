@@ -1,8 +1,18 @@
 import Sidebar from "@/components/dashboard/Sidebar";
 import { Navbar } from "@/components/shared/Navbar";
+import { syncUserWithDatabase } from "@/lib/auth";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
-function UserLayout({ children }: { children: ReactNode }) {
+async function UserLayout({ children }: { children: ReactNode }) {
+  const { userId } = await auth();
+
+  await syncUserWithDatabase();
+
+  if (!userId) {
+    redirect("/");
+  }
   return (
     <div className="flex flex-col flex-1">
       <Navbar />

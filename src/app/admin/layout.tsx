@@ -1,8 +1,23 @@
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import { Navbar } from "@/components/shared/Navbar";
+import { isAdmin } from "@/lib/auth";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
-function AdminLayout({ children }: { children: ReactNode }) {
+async function AdminLayout({ children }: { children: ReactNode }) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    redirect("/");
+  }
+
+  const admin = await isAdmin();
+
+  if (!admin) {
+    redirect("/");
+  }
+
   return (
     <div className="flex flex-col flex-1">
       <Navbar />
