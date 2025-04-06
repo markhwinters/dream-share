@@ -3,8 +3,14 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { SignInButton } from "@clerk/nextjs";
 import { ArrowRight, Cloud, Upload, Check, ShieldCheck } from "lucide-react";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { userId } = await auth();
+  if (userId) {
+    redirect("/dashboard");
+  }
   return (
     <div>
       {/* Hero Section */}
