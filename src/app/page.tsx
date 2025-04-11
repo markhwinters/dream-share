@@ -1,4 +1,3 @@
-// app/page.tsx
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { SignInButton } from "@clerk/nextjs";
@@ -9,7 +8,7 @@ import { redirect } from "next/navigation";
 export default async function HomePage() {
   const { userId } = await auth();
   if (userId) {
-    redirect("/dashboard");
+    redirect("/dream");
   }
   return (
     <div>

@@ -1,22 +1,20 @@
-import { isAdmin } from "@/actions/user.action";
+import { isAdmin, syncUser } from "@/actions/user.action";
 import { Navbar } from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
-async function AdminLayout({ children }: { children: ReactNode }) {
+async function UserLayout({ children }: { children: ReactNode }) {
   const { userId } = await auth();
+
+  await syncUser();
 
   if (!userId) {
     redirect("/");
   }
 
   const checkAdmin = await isAdmin();
-
-  if (!checkAdmin) {
-    redirect("/");
-  }
 
   return (
     <>
@@ -33,4 +31,4 @@ async function AdminLayout({ children }: { children: ReactNode }) {
   );
 }
 
-export default AdminLayout;
+export default UserLayout;

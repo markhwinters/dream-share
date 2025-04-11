@@ -28,25 +28,21 @@ model User {
 }
 
 model Dream {
-  id            String    @id @default(cuid())
-  title         String
-  description   String?
-  videoUrl      String
-  thumbnailUrl  String?
-  isApproved    Boolean   @default(false)
-  isPublic      Boolean   @default(false)
-  socialShares  SocialShare[]
-  userId        String
-  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  videUrl     String?
+  status      DreamStatus @default(PENDING)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
 }
 
-model SocialShare {
-  id            String    @id @default(cuid())
-  platform      String    // "instagram", "twitter", etc.
-  shareUrl      String?
-  shareDate     DateTime  @default(now())
-  dreamId       String
-  dream         Dream     @relation(fields: [dreamId], references: [id], onDelete: Cascade)
+enum DreamStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }

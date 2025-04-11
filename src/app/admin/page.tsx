@@ -1,12 +1,7 @@
-import { DashboardHeader } from "@/components/shared/DashboardHeader";
 import React from "react";
 
 function AdminDashboard() {
-  return (
-    <div>
-      <DashboardHeader heading="Dashboard" text="Admin dashboard" />
-    </div>
-  );
+  return <div>Admin Dashboard</div>;
 }
 
 export default AdminDashboard;
