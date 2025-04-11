@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Cloud, Home, Settings, Share2, User } from "lucide-react";
+import { Cloud, Home, Settings, Share, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -13,7 +13,7 @@ export const adminMenu = [
 ];
 
 export const userMenu = [
-  { name: "Home", href: "/dream", icon: Home },
+  { name: "Share", href: "/dream", icon: Share },
   { name: "View Dream", href: "/dream/id", icon: Cloud },
   { name: "Settings", href: "/settings", icon: Settings },
 ];
